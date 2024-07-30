@@ -1,4 +1,4 @@
 package dev.sunday.repository;
 
-public class UserRepository {
+public interface UserRepository {
 }
