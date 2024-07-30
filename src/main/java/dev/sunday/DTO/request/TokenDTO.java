@@ -1,4 +1,4 @@
 package dev.sunday.DTO.request;
 
-public class BookingDto {
+public class TokenDTO {
 }
