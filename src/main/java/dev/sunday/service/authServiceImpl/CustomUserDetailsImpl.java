@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -30,13 +31,33 @@ public class CustomUserDetailsImpl implements UserDetailsService {
 
         ROLE role = user.getRole();
 
-        if(role == null) role = ROLE.ROLE_USER;
+        if(role == null ){
+            role = ROLE.ROLE_USER;
+        } else if (role == ROLE.ROLE_ADMIN){
+            role = ROLE.ROLE_ADMIN;
+        }
+        role = ROLE.ROLE_USER;
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         authorities.add(new SimpleGrantedAuthority(role.toString()));
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+        return new UserDetails() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return List.of();
+            }
+
+            @Override
+            public String getPassword() {
+                return user.getPassword();
+            }
+
+            @Override
+            public String getUsername() {
+                return user.getEmail();
+            }
+        };
     }
 
 

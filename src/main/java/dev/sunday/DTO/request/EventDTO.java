@@ -2,18 +2,16 @@ package dev.sunday.DTO.request;
 
 import dev.sunday.enums.CATEGORY;
 import dev.sunday.enums.ROLE;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class EventDTO {
     private ROLE role;
     private String eventDescription;

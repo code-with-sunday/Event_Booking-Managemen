@@ -1,6 +1,7 @@
 package dev.sunday.controller;
 
 import dev.sunday.DTO.request.LoginRequestDTO;
+import dev.sunday.DTO.request.UserDTO;
 import dev.sunday.DTO.response.AuthResponse;
 import dev.sunday.model.User;
 import dev.sunday.service.UserService;
@@ -22,8 +23,8 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
-        return ResponseEntity.ok(authUserDetails.createUserHandler(user));
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody UserDTO userDTO) throws Exception {
+        return ResponseEntity.ok(authUserDetails.createUserHandler(userDTO));
     }
 
     @PostMapping("/login")

@@ -1,8 +1,12 @@
 package dev.sunday.DTO.request;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class LoginRequestDTO {
     private String email;
     private String password;

@@ -1,13 +1,15 @@
 package dev.sunday.DTO.request;
 
 import dev.sunday.enums.CATEGORY;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class SearchResultDTO {
     private Long eventId;
     private String eventDescription;

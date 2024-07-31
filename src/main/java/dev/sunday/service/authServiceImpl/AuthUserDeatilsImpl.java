@@ -1,6 +1,7 @@
 package dev.sunday.service.authServiceImpl;
 
 import dev.sunday.DTO.request.LoginRequestDTO;
+import dev.sunday.DTO.request.UserDTO;
 import dev.sunday.DTO.response.AuthResponse;
 import dev.sunday.enums.ROLE;
 import dev.sunday.model.User;
@@ -30,20 +31,28 @@ public class AuthUserDeatilsImpl implements AuthUserDetails{
 
 
     @Override
-    public AuthResponse createUserHandler(User user) throws Exception {
+    public AuthResponse createUserHandler(UserDTO userDTO) throws Exception {
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(userDTO.getRole());
+
         User isEmailExist  = userRepository.findByEmail(user.getEmail());
+
 
         if(isEmailExist != null){
             throw new Exception("Email is already used with another account");
         }
 
-        User createUser = new User();
-        createUser.setEmail(user.getEmail());
-        createUser.setName(user.getName());
-        createUser.setRole(user.getRole());
-        createUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEmail(user.getEmail());
+        user.setName(user.getName());
+        user.setRole(user.getRole());
+        user.getCreateDate();
+        user.getUpdateDate();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        User savedUser = userRepository.save(createUser);
+        User savedUser = userRepository.save(user);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -64,7 +73,7 @@ public class AuthUserDeatilsImpl implements AuthUserDetails{
 
         Authentication authentication = authenticate(username, password);
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        String role = authorities.isEmpty() ? null : authorities.iterator().next().getAuthority();
+        String role = authorities.isEmpty() ? String.valueOf(ROLE.ROLE_USER) : authorities.iterator().next().getAuthority();
 
         String jwt = jwtProvider.generateToken(authentication);
         AuthResponse authResponse = new AuthResponse();
