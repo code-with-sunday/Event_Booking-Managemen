@@ -25,18 +25,11 @@ public class CustomUserDetailsImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
 
-        if(user == null){
+        if(username == null){
             throw new UsernameNotFoundException("User not found with email " + username);
         }
 
-        ROLE role = user.getRole();
-
-        if(role == null ){
-            role = ROLE.ROLE_USER;
-        } else if (role == ROLE.ROLE_ADMIN){
-            role = ROLE.ROLE_ADMIN;
-        }
-        role = ROLE.ROLE_USER;
+        ROLE role = user.getRole() != null ? user.getRole() : ROLE.ROLE_USER;
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
@@ -45,7 +38,7 @@ public class CustomUserDetailsImpl implements UserDetailsService {
         return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-                return List.of();
+                return authorities;
             }
 
             @Override

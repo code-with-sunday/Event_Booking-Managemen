@@ -1,5 +1,6 @@
 package authUserDetailsImpl;
 
+import dev.sunday.DTO.request.LoginRequestDTO;
 import dev.sunday.DTO.request.UserDTO;
 import dev.sunday.DTO.response.AuthResponse;
 import dev.sunday.model.User;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static dev.sunday.enums.ROLE.ROLE_USER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -92,4 +94,5 @@ public class AuthUserDetailsImplTest {
 
         assertEquals(passwordEncoder.encode(userDTO.getPassword()), "EncodedPassword");
     }
+
 }

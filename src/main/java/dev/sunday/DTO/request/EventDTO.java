@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class EventDTO {
-    private ROLE role;
+    private Long eventId;
     private String eventDescription;
     private CATEGORY category;
     private Integer availableAttendeesCount;

@@ -52,14 +52,26 @@ public class EventServiceImpl implements EventServices {
 
             Event event = new Event();
             event.setEventDescription(eventDto.getEventDescription());
-            event.setRole(eventDto.getRole());
+            event.setRole(user.getRole());
+            event.setAvailableAttendeesCount(eventDto.getAvailableAttendeesCount());
             event.setCategory(eventDto.getCategory());
             event.setStartDateTime(eventDto.getStartDateTime());
             event.setEndDateTime(eventDto.getEndDateTime());
             event.setUser(user);
 
             Event savedEvent = eventRepository.save(event);
-            log.info("Saved event: {}", savedEvent);
+            savedEvent.getEventId();
+            Event savedEvent2 = savedEvent.builder()
+                    .eventId(savedEvent.getEventId())
+                    .eventDescription(savedEvent.getEventDescription())
+                    .role(savedEvent.getRole())
+                    .availableAttendeesCount(savedEvent.getAvailableAttendeesCount())
+                    .category(savedEvent.getCategory())
+                    .startDateTime(savedEvent.getStartDateTime())
+                    .endDateTime(savedEvent.getEndDateTime())
+                    .user(savedEvent.getUser())
+                    .build();
+            log.info("Saved event: {}", savedEvent2);
 
             List<Ticket> ticketsSpecification = eventDto.getTicketsInfo()
                     .stream()
@@ -73,10 +85,10 @@ public class EventServiceImpl implements EventServices {
             List<Ticket> savedTickets = ticketRepository.saveAll(ticketsSpecification);
             log.info("savedTickets with associated event saved successfully: {}", savedTickets);
 
-            EventDTO eventDto1 = EventToEventDTo(savedEvent);
+            EventDTO eventDto1 = EventToEventDTo(savedEvent2);
             eventDto1.setTicketsInfo(savedTickets.stream().map(this::ticket2TicketDto).collect(Collectors.toList()));
 
-            publishEvent(savedEvent.getEventId());
+            publishEvent(savedEvent2.getEventId());
 
             return new ResponseEntity<>(eventDto1, HttpStatus.OK);
 
@@ -92,7 +104,8 @@ public class EventServiceImpl implements EventServices {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authenticated");
         }
 
-        User user = (User) authentication.getPrincipal();
+        log.info("he principal: {}", authentication.getPrincipal());
+        User user = userRepository.findByEmail(authentication.getPrincipal().toString());
 
         try {
             Optional<Event> eventOptional = eventRepository.findById(eventId);
