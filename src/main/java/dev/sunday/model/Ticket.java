@@ -1,16 +1,14 @@
 package dev.sunday.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@ToString
 @Table(name = "ticket",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"event_id", "ticket"})})
 public class Ticket{

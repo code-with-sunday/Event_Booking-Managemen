@@ -45,9 +45,7 @@ public class EventServiceImpl implements EventServices {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null) {
-
             String email = (String) authentication.getPrincipal();
-
             User user = userRepository.findByEmail(email);
 
             Event event = new Event();
@@ -60,8 +58,8 @@ public class EventServiceImpl implements EventServices {
             event.setUser(user);
 
             Event savedEvent = eventRepository.save(event);
-            savedEvent.getEventId();
-            Event savedEvent2 = savedEvent.builder()
+
+            Event savedEvent2 = Event.builder()
                     .eventId(savedEvent.getEventId())
                     .eventDescription(savedEvent.getEventDescription())
                     .role(savedEvent.getRole())
@@ -71,6 +69,7 @@ public class EventServiceImpl implements EventServices {
                     .endDateTime(savedEvent.getEndDateTime())
                     .user(savedEvent.getUser())
                     .build();
+
             log.info("Saved event: {}", savedEvent2);
 
             List<Ticket> ticketsSpecification = eventDto.getTicketsInfo()
@@ -80,18 +79,20 @@ public class EventServiceImpl implements EventServices {
 
             for (Ticket ticket : ticketsSpecification) {
                 ticket.setEvent(savedEvent);
+                savedEvent.getTickets().add(ticket);
             }
 
             List<Ticket> savedTickets = ticketRepository.saveAll(ticketsSpecification);
-            log.info("savedTickets with associated event saved successfully: {}", savedTickets);
+            log.info("Saved tickets with associated event successfully: {}", savedTickets);
 
             EventDTO eventDto1 = EventToEventDTo(savedEvent2);
-            eventDto1.setTicketsInfo(savedTickets.stream().map(this::ticket2TicketDto).collect(Collectors.toList()));
+            eventDto1.setTicketsInfo(savedTickets.stream()
+                    .map(this::ticket2TicketDto)
+                    .collect(Collectors.toList()));
 
             publishEvent(savedEvent2.getEventId());
 
             return new ResponseEntity<>(eventDto1, HttpStatus.OK);
-
         } else {
             throw new RuntimeException("User not authenticated");
         }
@@ -221,6 +222,7 @@ public class EventServiceImpl implements EventServices {
 
     private EventDTO EventToEventDTo(Event event) {
         return EventDTO.builder()
+                .eventId(event.getEventId())
                 .eventDescription(event.getEventDescription())
                 .category(event.getCategory())
                 .availableAttendeesCount(event.getAvailableAttendeesCount())

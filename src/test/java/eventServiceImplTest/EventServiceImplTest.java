@@ -62,6 +62,8 @@ class EventServiceImplTest {
 
         User user = User.builder().email("sundaypetersp12@gmail.com").build();
 
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(user);
+
         Authentication authentication = mock(Authentication.class);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         when(authentication.getPrincipal()).thenReturn(user.getEmail());

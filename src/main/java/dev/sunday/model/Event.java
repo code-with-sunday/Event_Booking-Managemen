@@ -3,10 +3,7 @@ package dev.sunday.model;
 import dev.sunday.enums.CATEGORY;
 import dev.sunday.enums.ROLE;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
+@ToString
 public class Event extends AuditBaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +34,11 @@ public class Event extends AuditBaseEntity{
     private Date startDateTime;
     private Date endDateTime;
     private ROLE role;
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ticket> tickets = new ArrayList<>();
+
+    public List<Ticket> getTickets() {
+        return tickets != null ? tickets : new ArrayList<>();
+    }
 
 }
