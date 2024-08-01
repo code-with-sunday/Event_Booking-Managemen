@@ -169,15 +169,19 @@ public class EventServiceImpl implements EventServices {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getPrincipal().toString());
+        log.info("user is here: {}", user);
 
         if(user.getId()!= event1.getUser().getId()){
             throw new UnAuthorizedException("Access denied.You can't delete event you didn't create");
         }
+
         if(event1.getTicketSold()<1){
             ticketRepository.deleteAll(event1.getTickets());
             eventRepository.delete(event1);
             return new ResponseEntity<>("Event deleted successfully",HttpStatus.OK);
         }
+        log.info("event1 deleted: {}", event1);
+
         Date CurrentDate = new Date();
         if(CurrentDate.after(event1.getEndDateTime())){
             return  new ResponseEntity<>("Event has been deleted",HttpStatus.OK);

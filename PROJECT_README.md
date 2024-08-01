@@ -116,6 +116,9 @@ This is a list of things you will need to use the software and how I got to work
 
   ![EVENT BOOKING APPLICATION](noification.png)
 
+- [ ] <span style="font-size: 20px; font-weight: bold;">Cancel Event</span>
+  ![EVENT BOOKING APPLICATION](cancel_event.png)
+
 
 
 <!-- TEST -->

@@ -29,7 +29,7 @@ public class Event extends AuditBaseEntity{
 
     @Enumerated(EnumType.STRING)
     private CATEGORY category;
-    private Integer ticketSold;
+    private Integer ticketSold = 0;
     private Integer availableAttendeesCount;
     private Date startDateTime;
     private Date endDateTime;
