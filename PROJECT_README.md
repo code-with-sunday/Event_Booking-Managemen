@@ -40,6 +40,7 @@ The Event Booking System is designed to provide users with a convenient way to c
 * Springdoc-Openapi
 * Jason Web Toke(JWT)
 * Lombok
+* Spring-boot starter Validation
 * H2 database
 * Spring-boot starter test
 
