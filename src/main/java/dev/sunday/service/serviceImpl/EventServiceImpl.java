@@ -164,13 +164,12 @@ public class EventServiceImpl implements EventServices {
 
     @Override
     public ResponseEntity<String> deleteEvent(Long id) {
-        Optional<Event> event= eventRepository. findById(id);
-        if(event.isEmpty()){
-            throw new RequestedResourceNotFoundException("Event Not found");
-        }
-        Event event1 =event.get();
+        Event event1 = eventRepository.findById(id)
+                .orElseThrow(() -> new RequestedResourceNotFoundException("Event Not found"));
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)authentication.getPrincipal();
+        User user = userRepository.findByEmail(authentication.getPrincipal().toString());
+
         if(user.getId()!= event1.getUser().getId()){
             throw new UnAuthorizedException("Access denied.You can't delete event you didn't create");
         }

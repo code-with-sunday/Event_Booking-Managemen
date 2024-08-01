@@ -6,6 +6,7 @@ import dev.sunday.DTO.response.AuthResponse;
 import dev.sunday.model.User;
 import dev.sunday.service.UserService;
 import dev.sunday.service.authServiceImpl.AuthUserDetails;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody UserDTO userDTO) throws Exception {
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody @Valid UserDTO userDTO) throws Exception {
         return ResponseEntity.ok(authUserDetails.createUserHandler(userDTO));
     }
 
