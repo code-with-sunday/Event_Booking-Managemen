@@ -1,63 +1,148 @@
-# Event Booking
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    <li>
+      <a href="#about-the-project">Built With</a>
+    <li>
+      <a href="#about-the-project">Getting Started</a>
+    <li>
+      <a href="#about-the-project">Features/Usage</a>
+    <li>
+      <a href="#about-the-project">Sample Test</a>
+    <li>
+      <a href="#about-the-project">Sample Data Persisting DB</a>
+    <li>
+      <a href="#about-the-project">Contact</a>
+  </ol>
+</details>
 
-[[_TOC_]]
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
----
+![EVENT BOOKING APPLICATION](endpoint_swagger.png)
 
-:scroll: **START**
+[![EVENT BOOKING APPLICATION][SWAGGER-ENDPOINT-VIEW]](endpoint_swagger.png)
 
-## Introduction
+The Event Booking System is designed to provide users with a convenient way to create, find, and reserve tickets for various events. This system allows users validates users input and allow users to manage their reservations and receive notifications before the event starts.
 
-In today's fast-paced world, the convenience of booking systems has become an essential aspect of daily life. From booking tickets for a concert or reserving a spot at a conference, these systems are used widely by individuals and businesses alike.
 
----
 
-## Task Description
+### Built With
 
-The system will allow users to create, find and reserve tickets for events, view and manage their reservations and to be notified before the event kickoff.
+* Spring-Boot
+* Spring Security
+* Hibernate
+* Spring Stater JPA
+* Javax Mail and Javax Mail Activation
+* Springdoc-Openapi
+* Jason Web Toke(JWT)
+* Lombok
+* Spring-boot starter Validation
+* H2 database
+* Spring-boot starter test
 
-A **user** has:
-- name (limited to 100 characters);
-- email (valid email format);
-- password (minimum 8 characters).
 
-An **event** has:
-- name (limited to 100 characters);
-- date (in a valid date format);
-- available attendees count (positive integer limited to 1000);
-- event description (limited to 500 characters).
-- category (Concert, Conference, Game)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Develop a set of REST service APIs based on the swagger file provided - [swagger file](event-booking-swagger.yml), that allows users to:
+<!-- GETTING STARTED -->
+## Getting Started
 
-- Create an account;
-- User authentication to log into the system;
-- Create events;
-- Search and reserve tickets for events;
-- Send notification to users before event starts.
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
-> Feel free to make assumptions for the design approach. 
+### Prerequisites
 
-## Requirements
+This is a list of things you will need to use the software and how I got to work on this project
+* Java 17 
+* Maven
+* H2 database
 
-While implementing your solution **please take care of the following requirements:**
+### Installation
 
-### Functional requirements
+1. Clone the repo
+   ```sh
+   git clone https://oauth:glpat-whMJBguVQBgxFiiqfCyM@gitlab.com/musala_soft/DEV_EVENT_BOOKING-493cd35a-b8f0-fd44-a544-778ff66c07cd.git
+   ```
+2. create pom.xml file to load maven
+   ```sh
+   add. 
+    
+   <?xml version="1.0" encoding="UTF-8"?>
+     ```
+     ```sh 
+   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"> <modelVersion>4.0.0</modelVersion>
+   ```
+3. create src file and add dependencies 
+   ```sh
+   src >>> main >>> java >>> dev.sunday
+   
+   src >>> main >>> resources >>> application.properties
+   ```
 
-- The REST API methods should be implemented based on the specification provided in the linked swagger file;
-- Add 2 new methods, one to **view** your booked events and one to **cancel** your reservation _**(both should be authorized)**_;
-- Introduce a periodic task to send notifications for upcoming events to users and create history/audit event log for this.
-- No need for UI;
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Non-functional requirements
 
-- The project MUST be buildable and runnable;
-- The project MUST have Unit tests;
-- The project MUST have a README file with build/run/test instructions (use a DB that can be run locally, e.g. in-memory, via container);
-- Any data required by the application to run (e.g. reference tables, dummy data) MUST be preloaded in the database;
-- Input/output data MUST be in JSON format;
-- Use a framework of your choice, but popular, up-to-date, and long-term support versions are recommended.
+<!-- USAGE EXAMPLES -->
+## Features / Usage
 
----
+- [ ] <span style="font-size: 20px; font-weight: bold;">User Registration / Sign-up</span>
 
-:scroll: **END**
+    ![EVENT BOOKING APPLICATION](sign_up.png)
+    ![EVENT BOOKING APPLICATION](response_signup.png)
+
+
+- [ ] <span style="font-size: 20px; font-weight: bold;">User Login / JWT TOKEN</span>
+
+    ![EVENT BOOKING APPLICATION](login_request.png)
+    ![EVENT BOOKING APPLICATION](login_response.png)
+
+- [ ] <span style="font-size: 20px; font-weight: bold;">User Create Event</span>
+
+  ![EVENT BOOKING APPLICATION](create_event.png)
+  ![EVENT BOOKING APPLICATION](create_event_response.png)
+
+- [ ] <span style="font-size: 20px; font-weight: bold;">Search Event</span>
+
+  ![EVENT BOOKING APPLICATION](search_event.png)
+
+- [ ] <span style="font-size: 20px; font-weight: bold;">View Events</span>
+
+  ![EVENT BOOKING APPLICATION](view_event.png)
+
+- [ ] <span style="font-size: 20px; font-weight: bold;">Publish Event / Notification</span>
+
+  ![EVENT BOOKING APPLICATION](noification.png)
+
+- [ ] <span style="font-size: 20px; font-weight: bold;">Cancel Event</span>
+  ![EVENT BOOKING APPLICATION](cancel_event.png)
+
+
+
+<!-- TEST -->
+## Sample Test 
+
+![EVENT BOOKING APPLICATION](passed_test.png)
+![EVENT BOOKING APPLICATION](passed_test_multiple_assumptions.png)
+
+<!-- DB -->
+## Sample Data Persisting DB
+![EVENT BOOKING APPLICATION](user_data_db.png)
+
+
+
+
+<!-- CONTACT -->
+## Contact
+- [ ] <span style="font-size: 16px; font-weight: bold;">SUNDAY PETER</span>
+
+- [ ] <span style="font-size: 16px; font-weight: bold;">[@linkedin](https://www.linkedin.com/in/sundaypeter1/)</span>
+
+- [ ] <span style="font-size: 16px; font-weight: bold;">sundaypetersp12@gmail.com</span>
+
+- [ ] <span style="font-size: 16px; font-weight: bold;">WhatsApp : 08186707807</span>
+
+- [ ] <span style="font-size: 16px; font-weight: bold;">CALL : 08169036052</span>
+

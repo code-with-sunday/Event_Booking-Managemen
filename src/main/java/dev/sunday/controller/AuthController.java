@@ -3,8 +3,6 @@ package dev.sunday.controller;
 import dev.sunday.DTO.request.LoginRequestDTO;
 import dev.sunday.DTO.request.UserDTO;
 import dev.sunday.DTO.response.AuthResponse;
-import dev.sunday.model.User;
-import dev.sunday.service.UserService;
 import dev.sunday.service.authServiceImpl.AuthUserDetails;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserService userService;
     private final AuthUserDetails authUserDetails;
 
 
