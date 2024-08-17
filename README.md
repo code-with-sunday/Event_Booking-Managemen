@@ -64,7 +64,7 @@ This is a list of things you will need to use the software and how I got to work
 
 1. Clone the repo
    ```sh
-   git clone https://oauth:glpat-whMJBguVQBgxFiiqfCyM@gitlab.com/musala_soft/DEV_EVENT_BOOKING-493cd35a-b8f0-fd44-a544-778ff66c07cd.git
+   git clone https://oauth:glpat-whMJBguVQBgxFiiqfCyM@gitlab.com/sundayxyz/DEV_EVENT_BOOKING-493cd35a-b8f0-fd44-a544-778ff66c07cd.git
    ```
 2. create pom.xml file to load maven
    ```sh
